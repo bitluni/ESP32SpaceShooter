@@ -36,3 +36,39 @@ class Animation: public GameEntity
   }
 };
 
+Animation *animations[100] = {0};
+
+void animationsAct(int dt)
+{
+   for(int i = 0; i < 100; i++)
+  {
+    if(animations[i])
+      if(!animations[i]->act(dt))
+      {
+        delete animations[i];
+        animations[i] = 0;
+      }
+  }
+}
+
+void animationsDraw()
+{
+    for(int i = 0; i < 100; i++)
+    if(animations[i])
+      if(animations[i])
+        animations[i]->draw(graphics);
+}
+
+void animationsEmit(Animation *e)
+{
+  for(int i = 0; i < 100; i++)
+  {
+    if(!animations[i])
+    {
+      animations[i] = e;
+      return;
+    }
+  }
+  delete e;
+}
+
